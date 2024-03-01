@@ -1,1 +1,38 @@
-# tippraten
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zahlraten Spiel</title>
+</head>
+<body>
+    <script>
+        var ausgedachteZahl;
+        var obereGrenze = 100;
+        var gerateneZahl;
+        var anzahlDerVersuche = 0;
+
+        ausgedachteZahl = Math.floor(Math.random() * obereGrenze) + 1;
+
+        do {
+            gerateneZahl = parseInt(prompt("Rate bitte eine Zahl zwischen 1 und " + obereGrenze));
+
+            if (isNaN(gerateneZahl)) {
+                alert("Ungültige Eingabe. Bitte geben Sie eine Zahl ein.");
+            } else {
+                if (gerateneZahl > ausgedachteZahl) {
+                    alert("Deine Zahl ist zu groß.");
+                } else if (gerateneZahl < ausgedachteZahl) {
+                    alert("Deine Zahl ist zu klein.");
+                } else {
+                    alert("Richtig geraten!");
+                }
+                anzahlDerVersuche++;
+            }
+        } while (gerateneZahl !== ausgedachteZahl);
+
+        alert("Du hast " + anzahlDerVersuche + " Mal geraten.");
+    </script>
+</body>
+</html>
+
