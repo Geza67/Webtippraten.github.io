@@ -4,34 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zahlraten Spiel</title>
+    <style>
+        #guessInput {
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
+    <h1>Willkommen zum Zahlraten Spiel!</h1>
+    <p>Errate eine Zahl zwischen 1 und 100:</p>
+    <input type="number" id="guessInput">
+    <button onclick="rate()">Rate!</button>
+    <p id="result"></p>
+
     <script>
         var ausgedachteZahl;
         var obereGrenze = 100;
-        var gerateneZahl;
         var anzahlDerVersuche = 0;
 
-        ausgedachteZahl = Math.floor(Math.random() * obereGrenze) + 1;
+        function init() {
+            ausgedachteZahl = Math.floor(Math.random() * obereGrenze) + 1;
+        }
 
-        do {
-            gerateneZahl = parseInt(prompt("Rate bitte eine Zahl zwischen 1 und " + obereGrenze));
+        function rate() {
+            var gerateneZahl = parseInt(document.getElementById("guessInput").value);
 
             if (isNaN(gerateneZahl)) {
-                alert("Ungültige Eingabe. Bitte geben Sie eine Zahl ein.");
+                document.getElementById("result").innerText = "Ungültige Eingabe. Bitte geben Sie eine Zahl ein.";
             } else {
-                if (gerateneZahl > ausgedachteZahl) {
-                    alert("Deine Zahl ist zu groß.");
-                } else if (gerateneZahl < ausgedachteZahl) {
-                    alert("Deine Zahl ist zu klein.");
-                } else {
-                    alert("Richtig geraten!");
-                }
                 anzahlDerVersuche++;
-            }
-        } while (gerateneZahl !== ausgedachteZahl);
 
-        alert("Du hast " + anzahlDerVersuche + " Mal geraten.");
+                if (gerateneZahl > ausgedachteZahl) {
+                    document.getElementById("result").innerText = "Deine Zahl ist zu groß.";
+                } else if (gerateneZahl < ausgedachteZahl) {
+                    document.getElementById("result").innerText = "Deine Zahl ist zu klein.";
+                } else {
+                    document.getElementById("result").innerText = "Richtig geraten! Du hast " + anzahlDerVersuche + " Mal geraten.";
+                    document.getElementById("guessInput").disabled = true;
+                }
+            }
+        }
+
+        init(); // Spiel initialisieren
     </script>
 </body>
 </html>
